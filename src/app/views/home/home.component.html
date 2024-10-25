@@ -33,20 +33,28 @@
     <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">
         Products
     </div>
+    @if (product.length) {
     <div class="row row-cols-1 row-cols-md-3 g-4">
+        @for (item of product; track item) {
         <div class="col">
             <div class="card border-light text-bg-dark mb-3">
                 <img [src]="'assets/images/teclado-logitech.png'" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Teclado Mecânico Gamer Logitech G PRO K/DA - Edição Oficial League of Legends
-                        KDA
-                    </h5>
-                    <p class="card-text">Layout US, RGB LIGHTSYNC, Design TKL, Cabo Destacável e Switch Exclusivo GX
-                        Brown Tactile</p>
-                    <p class="card-text">R$ 699,90</p>
+                    <h5 class="card-title">{{item.product_name}}</h5>
+                    <p class="card-text">{{item.product_description}}</p>
+                    <p class="card-text">R$ {{item.product_price}}</p>
+                    <p class="card-text">quantitidade: {{item.product_quantity}}</p>
                     <a href="#" class="btn btn-light">Comprar</a>
                 </div>
             </div>
         </div>
+        }
     </div>
+    }@else{
+    <div class="card">
+        <div class="card-body text-center">
+            OUT OF STOCK
+        </div>
+    </div>
+    }
 </div>
