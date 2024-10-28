@@ -17,7 +17,7 @@ export class ProductService {
     return this.httpClient.get<Product[]>(this.api_url);
   }
 
-  getProductImage(id: number) {
-    return this.httpClient.get(this.api_url_image + id);
+  getProductImage(imageName: string) {
+    return this.httpClient.get(this.api_url_image + imageName, { responseType: 'blob' });
   }
 }

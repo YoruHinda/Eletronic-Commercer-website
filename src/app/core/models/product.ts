@@ -4,4 +4,5 @@ export class Product {
     product_description!: string;
     product_quantity!: number;
     product_price!: number;
+    product_image_name!: string;
 }

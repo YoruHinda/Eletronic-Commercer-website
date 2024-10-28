@@ -33,12 +33,12 @@
     <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">
         Products
     </div>
-    @if (product != null) {
+    @if (products != null) {
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        @for (item of product; track item) {
+        @for (item of products; track item) {
         <div class="col">
             <div class="card border-light text-bg-dark mb-3">
-                <img [src]="loadImage(item.id)" class="card-img-top" alt="...">
+                <img [src]="getImageByName(item.product_image_name)" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{item.product_name}}</h5>
                     <p class="card-text">{{item.product_description}}</p>
@@ -50,7 +50,7 @@
         </div>
         }
     </div>
-    }@else if(product == null){
+    }@else if(products == null){
     <div class="card">
         <div class="card-body text-center">
             OUT OF STOCK
