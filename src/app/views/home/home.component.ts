@@ -12,7 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 
 export class HomeComponent implements OnInit {
-  products!: Product[];
+  products: Product[] = [];
   images: Image[] = []
 
   ngOnInit() {

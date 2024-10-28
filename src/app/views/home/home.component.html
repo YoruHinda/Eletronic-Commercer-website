@@ -33,7 +33,7 @@
     <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">
         Products
     </div>
-    @if (products != null) {
+    @if (products.length) {
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @for (item of products; track item) {
         <div class="col">
@@ -50,7 +50,7 @@
         </div>
         }
     </div>
-    }@else if(products == null){
+    }@else{
     <div class="card">
         <div class="card-body text-center">
             OUT OF STOCK
