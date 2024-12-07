@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FooterComponent } from "../footer/footer.component";
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [FooterComponent, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -16,8 +18,8 @@ export class HomeComponent implements OnInit {
   images: Image[] = []
 
   ngOnInit() {
-    this.getAllProducts();
-    this.getAllImageByProducts();
+    //this.getAllProducts();
+    //this.getAllImageByProducts();
   }
 
   constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
