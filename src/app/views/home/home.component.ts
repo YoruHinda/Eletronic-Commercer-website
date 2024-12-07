@@ -8,7 +8,7 @@ import { HeaderComponent } from "../header/header.component";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FooterComponent, HeaderComponent],
+  imports: [HeaderComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
   images: Image[] = []
 
   ngOnInit() {
-    //this.getAllProducts();
-    //this.getAllImageByProducts();
+    this.getAllProducts();
+    this.getAllImageByProducts();
   }
 
   constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
