@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  api_url: string = 'http://172.18.0.3:8080/products/'
-  api_url_image: string = 'http://172.18.0.3:8080/products/product_image/'
+  api_url: string = environment.apiUrl + '/products/'
+  api_url_image: string = environment.apiUrl + '/products/product_image/'
 
   constructor(private httpClient: HttpClient) {
   }
