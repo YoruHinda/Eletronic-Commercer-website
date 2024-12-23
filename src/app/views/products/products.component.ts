@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
-import { FooterComponent } from "../footer/footer.component";
 import { ProductService } from '../../core/services/product.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Product } from '../../core/models/product';
@@ -8,7 +7,7 @@ import { Product } from '../../core/models/product';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
