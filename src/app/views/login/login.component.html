@@ -1,11 +1,16 @@
-<div class="container position-absolute top-50 start-50 translate-middle">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" placeholder="User">
-        <label for="floatingInput">User</label>
+<div
+    class="container position-absolute top-50 start-50 translate-middle border w-50 h-50 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <div class="position-absolute top-50 start-50 translate-middle w-75">
+        <img [src]="'./assets/images/user.png'" alt="usericon" width="75" class="d-block mx-auto mb-2">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="User">
+            <label for="floatingInput">User</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <button type="button" class="btn btn-dark mt-3 me-2">Login</button>
+        <button type="button" class="btn btn-dark mt-3">Register</button>
     </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-    </div>
-    <button type="button" class="btn btn-light">Login</button>
 </div>
