@@ -14,7 +14,7 @@ export class SecurityService {
 
   login(user: User): Observable<any> {
     return this.httpClient.post<any>(environment.apiUrl + '/auth/login', user).pipe(tap((res) => {
-      localStorage.setItem('token', btoa(JSON.stringify(res)))
+      localStorage.setItem('token', btoa(JSON.stringify(res['token'])))
     }));
   }
 
