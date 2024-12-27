@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 export class ProductService {
   api_url: string = environment.apiUrl + '/products/'
   api_url_image: string = environment.apiUrl + '/products/product_image/'
+  admin_api_url: string = environment.apiUrl + '/admin/'
 
   constructor(private httpClient: HttpClient) {
   }
@@ -20,5 +21,17 @@ export class ProductService {
 
   getProductImage(imageName: string) {
     return this.httpClient.get(this.api_url_image + imageName, { responseType: 'blob' });
+  }
+
+  addNewProduct() {
+
+  }
+
+  removeProduct() {
+
+  }
+
+  updateProduct() {
+
   }
 }
