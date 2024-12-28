@@ -1,17 +1,17 @@
 <app-header></app-header>
-<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+<form #loginForm="ngForm" (ngSubmit)="login(loginForm)" ngNativeValidate>
     <div
         class="container position-absolute top-50 start-50 translate-middle border w-50 h-50 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <div class="position-absolute top-50 start-50 translate-middle w-75">
             <img [src]="'./assets/images/user.png'" alt="usericon" width="75" class="d-block mx-auto mb-2">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" placeholder="Username" ngModel id="username"
-                    name="username">
+                    name="username" required>
                 <label for="floatingInput">Username</label>
             </div>
             <div class="form-floating">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password" ngModel
-                    id="password" name="password">
+                    id="password" name="password" required>
                 <label for="floatingPassword">Password</label>
             </div>
             <button type="submit" class="btn btn-dark mt-3 me-2">Login</button>
@@ -19,3 +19,20 @@
         </div>
     </div>
 </form>
+
+<div class="modal" tabindex="-1" #testModal>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login Error!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Try Again!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
