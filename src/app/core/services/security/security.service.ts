@@ -9,6 +9,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class SecurityService {
+  logged!: boolean;
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -19,6 +20,7 @@ export class SecurityService {
         localStorage.setItem('username', btoa(JSON.stringify(res['username'])))
         localStorage.setItem('user_role', btoa(JSON.stringify(res['user_role'])))
         this.router.navigate([''])
+        this.logged = true
         return res;
       }
     }));
@@ -30,11 +32,12 @@ export class SecurityService {
 
   logout() {
     localStorage.clear();
+    this.logged = false;
     this.router.navigate(['login'])
   }
 
   isLogged(): boolean {
-    return localStorage.getItem('token') ? true : false;
+    return this.logged
   }
 
   getUserRole(): string {

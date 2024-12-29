@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SecurityService } from '../../core/services/security/security.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +10,9 @@ import { SecurityService } from '../../core/services/security/security.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  homePage: string = ''
-  adminPage: string = '/admin'
   isLogged!: boolean
 
-  constructor(private securityService: SecurityService) {
+  constructor(private securityService: SecurityService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,5 +21,17 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.securityService.logout();
+  }
+
+  userLoginNavigator() {
+    if (this.securityService.isLogged() && this.securityService.getUserRole() == 'USER') {
+      this.router.navigate([''])
+    }
+    if (this.securityService.isLogged() && this.securityService.getUserRole() == 'ADMIN') {
+      this.router.navigate(['/admin'])
+    }
+    if (!(this.securityService.isLogged())) {
+      this.router.navigate(['/login'])
+    }
   }
 }

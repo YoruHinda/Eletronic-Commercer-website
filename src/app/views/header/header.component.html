@@ -17,14 +17,14 @@
                     <a class="nav-link active text-light" aria-current="page" href="/products">Products</a>
                 </li>
             </ul>
-            <a class="navbar-brand">
+            <a class="navbar-brand hoverclick">
                 <img [src]="'./assets/images/cart.png'" alt="carticon" width="32" height="32">
             </a>
-            <a class="navbar-brand" href="/login">
+            <a class="navbar-brand hoverclick" (click)="userLoginNavigator()">
                 <img [src]="'./assets/images/user.png'" alt="usericon" width="32" height="32">
             </a>
             @if(isLogged){
-            <a class="navbar-brand" (click)="logout()">
+            <a class="navbar-brand hoverclick" (click)="logout()">
                 <img [src]="'./assets/images/logout_icon.png'" alt="usericon" width="32" height="32">
             </a>
             }
