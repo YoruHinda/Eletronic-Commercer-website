@@ -23,8 +23,8 @@
             <a class="navbar-brand" href="/login">
                 <img [src]="'./assets/images/user.png'" alt="usericon" width="32" height="32">
             </a>
-            @if(false){
-            <a class="navbar-brand" href="/login">
+            @if(isLogged){
+            <a class="navbar-brand" (click)="logout()">
                 <img [src]="'./assets/images/logout_icon.png'" alt="usericon" width="32" height="32">
             </a>
             }

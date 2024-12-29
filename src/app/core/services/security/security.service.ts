@@ -30,7 +30,7 @@ export class SecurityService {
 
   logout() {
     localStorage.clear();
-    this.router.navigate([''])
+    this.router.navigate(['login'])
   }
 
   isLogged(): boolean {
