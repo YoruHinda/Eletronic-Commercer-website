@@ -19,7 +19,7 @@ export class SecurityService {
         localStorage.setItem('token', btoa(JSON.stringify(res['token'])))
         localStorage.setItem('username', btoa(JSON.stringify(res['username'])))
         localStorage.setItem('user_role', btoa(JSON.stringify(res['user_role'])))
-        this.router.navigate([''])
+        this.router.navigate(['/'])
         this.logged = true
         return res;
       }
