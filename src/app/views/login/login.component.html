@@ -48,11 +48,13 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="UsernameInput" class="form-label">Username</label>
-                        <input type="text" class="form-control" aria-describedby="usernamehelp" required>
+                        <input type="text" class="form-control" aria-describedby="usernamehelp" required ngModel
+                            name="username">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" required>
+                        <input type="password" class="form-control" id="exampleInputPassword1" required ngModel
+                            name="password">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -63,3 +65,14 @@
         </div>
     </form>
 </div>
+@if(registerErrorOcurred){
+<div class="alert alert-danger" role="alert">
+    Failed in register, Try Again!
+</div>
+}
+
+@if(registerSuccess){
+<div class="alert alert-success" role="alert">
+    Register Success!
+</div>
+}

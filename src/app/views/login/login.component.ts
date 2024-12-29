@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { SecurityService } from '../../core/services/security/security.service';
 import { User } from '../../core/models/user';
@@ -13,33 +13,52 @@ declare var bootstrap: any;
   styleUrl: './login.component.css'
 })
 
-export class LoginComponent {
-  @ViewChild('loginErrorModal', { static: true }) loginErrorModal?: ElementRef;
-  @ViewChild('registerModal') registerModal!: ElementRef
+export class LoginComponent implements OnInit {
+  @ViewChild('loginErrorModal', { static: true }) loginErrorModal!: ElementRef;
+  @ViewChild('registerModal', { static: true }) registerModal!: ElementRef
+  registerErrorOcurred: boolean = false;
+  registerSuccess: boolean = false;
+  registerModalControl: any
+  loginErrorControl: any
 
   constructor(private securityService: SecurityService) {
   }
 
+  ngOnInit(): void {
+    this.registerModalControl = new bootstrap.Modal(this.registerModal.nativeElement, {})
+    this.loginErrorControl = new bootstrap.Modal(this.loginErrorModal.nativeElement, {})
+  }
+
   login(form: NgForm) {
-    let user = new User(form.value['username'], form.value['password'])
+    const user = new User(form.value['username'], form.value['password'])
     this.securityService.login(user).subscribe({
       next: () => {
         console.log(localStorage.getItem('token'))
       },
       error: () => {
-        const a = new bootstrap.Modal(this.loginErrorModal?.nativeElement, {})
-        a.show()
+        this.loginErrorControl.show()
       }
     }
     )
   }
 
   showRegisterModal() {
-    const a = new bootstrap.Modal(this.registerModal?.nativeElement, {})
-    a.show()
+    this.registerModalControl.show()
   }
 
   register(form: NgForm) {
-
+    const user = new User(form.value['username'], form.value['password'])
+    this.securityService.register(user).subscribe({
+      next: () => {
+        this.registerModalControl.hide()
+        this.registerSuccess = true;
+        this.registerErrorOcurred = false;
+      },
+      error: () => {
+        this.registerModalControl.hide()
+        this.registerSuccess = false;
+        this.registerErrorOcurred = true;
+      }
+    })
   }
 }

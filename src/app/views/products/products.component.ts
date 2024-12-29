@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { ProductService } from '../../core/services/product.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,16 +11,16 @@ import { Product } from '../../core/models/product';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   products: Product[] = [];
   images: Image[] = []
 
-  ngOnInit() {
-    this.getAllProducts();
-    this.getAllImageByProducts();
+  constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
   }
 
-  constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
+  ngOnInit(): void {
+    this.getAllProducts();
+    this.getAllImageByProducts();
   }
 
   getAllProducts() {

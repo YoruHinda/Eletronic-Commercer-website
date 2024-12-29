@@ -17,12 +17,12 @@ export class HomeComponent implements OnInit {
   products: Product[] = [];
   images: Image[] = []
 
-  ngOnInit() {
-    this.getAllProducts();
-    this.getAllImageByProducts();
+  constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
   }
 
-  constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
+  ngOnInit(): void {
+    this.getAllProducts();
+    this.getAllImageByProducts();
   }
 
   getAllProducts() {
@@ -43,10 +43,8 @@ export class HomeComponent implements OnInit {
   }
 
   getImageByName(imageName: string) {
-    if (this.images != null) {
-      let image = this.images.find((image) => image.imageName === imageName)
-      return image != null ? image.imageData : null
-    }
+    let image = this.images.find((image) => image.imageName === imageName)
+    return image != null ? image.imageData : null
   }
 }
 

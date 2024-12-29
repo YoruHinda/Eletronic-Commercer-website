@@ -17,12 +17,17 @@
                     <a class="nav-link active text-light" aria-current="page" href="/products">Products</a>
                 </li>
             </ul>
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand">
                 <img [src]="'./assets/images/cart.png'" alt="carticon" width="32" height="32">
             </a>
             <a class="navbar-brand" href="/login">
                 <img [src]="'./assets/images/user.png'" alt="usericon" width="32" height="32">
             </a>
+            @if(false){
+            <a class="navbar-brand" href="/login">
+                <img [src]="'./assets/images/logout_icon.png'" alt="usericon" width="32" height="32">
+            </a>
+            }
         </div>
     </div>
 </nav>

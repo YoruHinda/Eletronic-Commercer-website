@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SecurityService } from '../../core/services/security/security.service';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  homePage: string = ''
+  adminPage: string = '/admin'
 
+  constructor(private securityService: SecurityService) {
+  }
 }

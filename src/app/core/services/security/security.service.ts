@@ -16,6 +16,8 @@ export class SecurityService {
     return this.httpClient.post<any>(environment.apiUrl + '/auth/login', user).pipe(tap((res) => {
       if (res) {
         localStorage.setItem('token', btoa(JSON.stringify(res['token'])))
+        localStorage.setItem('username', btoa(JSON.stringify(res['username'])))
+        localStorage.setItem('user_role', btoa(JSON.stringify(res['user_role'])))
         this.router.navigate([''])
         return res;
       }
@@ -29,5 +31,13 @@ export class SecurityService {
   logout() {
     localStorage.clear();
     this.router.navigate([''])
+  }
+
+  isLogged(): boolean {
+    return localStorage.getItem('token') ? true : false;
+  }
+
+  getUserRole(): string {
+    return localStorage.getItem('user_role') ? JSON.parse(atob(localStorage.getItem('user_role') as string)) : null;
   }
 }
