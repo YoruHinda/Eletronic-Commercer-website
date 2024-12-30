@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FooterComponent } from "../footer/footer.component";
 import { HeaderComponent } from "../header/header.component";
+import { forkJoin, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +16,16 @@ import { HeaderComponent } from "../header/header.component";
 
 export class HomeComponent implements OnInit {
   products: Product[] = [];
-  images: Image[] = []
+  images: any;
 
   constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.getAllImageByProducts();
+    this.getAllImageByProducts()
+    console.log(this.products)
+    console.log(this.images)
   }
 
   getAllProducts() {
@@ -32,20 +35,21 @@ export class HomeComponent implements OnInit {
   }
 
   getAllImageByProducts() {
-    if (this.products != null) {
-      this.products.forEach((product) => {
-        this.product_service.getProductImage(product.product_image_name).subscribe((data) => {
-          let objectURL = URL.createObjectURL(data);
-          this.images.push(new Image(product.product_image_name, this.sanitizer.bypassSecurityTrustUrl(objectURL)))
-        })
-      })
-    }
+    const imagesRequest = this.products.map(product => {
+      this.product_service.getProductImage(product.product_image_name).pipe(map(data => ({
+        name: product.product_image_name,
+        blob: data
+      })))
+    })
+    forkJoin([imagesRequest]).subscribe(responseList => {
+      this.images = responseList;
+    })
   }
 
-  getImageByName(imageName: string) {
-    let image = this.images.find((image) => image.imageName === imageName)
-    return image != null ? image.imageData : null
-  }
+  // getImageByName(imageName: string) {
+  // let image = this.images.find((image) => image.imageName === imageName)
+  // return image != null ? image.imageData : null
+  // }
 }
 
 class Image {
