@@ -3,6 +3,7 @@ import { HeaderComponent } from "../header/header.component";
 import { DomSanitizer } from '@angular/platform-browser';
 import { Product } from '../../core/models/product';
 import { ProductService } from '../../core/services/product/product.service';
+import { Product_Image } from '../../core/models/Product_Image';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,7 @@ import { ProductService } from '../../core/services/product/product.service';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  images: Image[] = []
+  images: Product_Image[] = []
 
   constructor(private product_service: ProductService, private sanitizer: DomSanitizer) {
   }
@@ -30,29 +31,14 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllImageByProducts() {
-    if (this.products != null) {
-      this.products.forEach((product) => {
-        this.product_service.getProductImage(product.product_image_name).subscribe((data) => {
-          let objectURL = URL.createObjectURL(data);
-          this.images.push(new Image(product.product_image_name, this.sanitizer.bypassSecurityTrustUrl(objectURL)))
-        })
-      })
-    }
+    this.product_service.getProductImages().subscribe((data) => {
+      this.images = data
+    })
   }
 
   getImageByName(imageName: string) {
-    if (this.images != null) {
-      let image = this.images.find((image) => image.imageName === imageName)
-      return image != null ? image.imageData : null
-    }
-  }
-}
-
-class Image {
-  imageName: string;
-  imageData: any;
-  constructor(imageName: string, imageData: any) {
-    this.imageName = imageName;
-    this.imageData = imageData;
+    let image = this.images.find((image) => image.product_image_name === imageName)
+    let objectURL = 'data:image/jpeg;base64,' + image?.image
+    return image != null ? this.sanitizer.bypassSecurityTrustUrl(objectURL) : null
   }
 }
