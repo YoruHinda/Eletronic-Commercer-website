@@ -39,7 +39,8 @@
 </div>
 
 <div #addProductModal class="modal fade" tabindex="-1">
-    <form #addProductForm="ngForm" (ngSubmit)="''" ngNativeValidate>
+    <form #addProductForm="ngForm" (ngSubmit)="createProduct(addProductForm)" ngNativeValidate
+        enctype="multipart/form-data">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -54,7 +55,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="ProductDescriptionInput" class="form-label">Product Description</label>
-                        <textarea class="form-control" rows="3" name="productDescription"></textarea>
+                        <textarea class="form-control" rows="3" name="productDescription" required ngModel></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="ProductQuantityInput" class="form-label">Product Quantity</label>
@@ -64,11 +65,12 @@
                     <div class="mb-3">
                         <label for="ProductPriceInput" class="form-label">Product Price</label>
                         <input type="number" class="form-control" aria-describedby="productPrice" required ngModel
-                            name="productPrice">
+                            name="productPrice" step="any">
                     </div>
                     <div class="mb-3">
                         <label for="formFileSm" class="form-label">Product Image</label>
-                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="productImage">
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="productImage"
+                            required ngModel accept=".jpeg,.png" (change)="handleFileInput($any($event.target).files)">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -81,7 +83,7 @@
 </div>
 
 <div #editProductModal class="modal fade" tabindex="-1">
-    <form #editProductForm="ngForm" (ngSubmit)="''" ngNativeValidate>
+    <form #editProductForm="ngForm" (ngSubmit)="updateProduct(editProductForm)" ngNativeValidate>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,8 +98,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="productDescription" class="form-label">Product Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                            name="productDescription" ngModel></textarea>
+                        <textarea class="form-control" id="productDescription" rows="3" name="productDescription"
+                            ngModel required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="productQuantity" class="form-label">Product Quantity</label>
@@ -107,7 +109,7 @@
                     <div class="mb-3">
                         <label for="productPrice" class="form-label">Product Price</label>
                         <input type="number" class="form-control" aria-describedby="productPrice" required ngModel
-                            name="productPrice">
+                            name="productPrice" step="any">
                     </div>
                 </div>
                 <div class="modal-footer">

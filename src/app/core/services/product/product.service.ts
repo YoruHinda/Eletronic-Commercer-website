@@ -24,16 +24,20 @@ export class ProductService {
     return this.httpClient.get(this.api_url_image + imageName, { responseType: 'blob' });
   }
 
-  addNewProduct(product: Product, image: any) {
+  addNewProduct(product: Product, image: File) {
     const formData = new FormData();
-    formData.append('product', JSON.stringify(product));
-    formData.append('productImage', image)
+    const productBlob = new Blob([JSON.stringify(product)], {
+      type: 'application/json'
+    })
+    const imageBlob = new Blob([image], { type: image.type })
+    formData.append('product', productBlob);
+    formData.append('productImage', imageBlob)
     let header = new HttpHeaders({
-      'Content-Type': 'multipart/form-data',
+      'Accept': 'application/json',
       'Authorization': 'Bearer ' + this.securityService.getToken()
     })
 
-    return this.httpClient.post(this.admin_api_url, formData, { headers: header })
+    return this.httpClient.post(environment.apiUrl + '/products/admin', formData, { headers: header })
   }
 
   removeProduct(id: number) {
