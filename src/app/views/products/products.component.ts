@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
-import { ProductService } from '../../core/services/product.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Product } from '../../core/models/product';
+import { ProductService } from '../../core/services/product/product.service';
 
 @Component({
   selector: 'app-products',

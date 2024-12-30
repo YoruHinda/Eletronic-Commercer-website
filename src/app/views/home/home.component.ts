@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ProductService } from '../../core/services/product.service';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../core/models/product';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FooterComponent } from "../footer/footer.component";
 import { HeaderComponent } from "../header/header.component";
 import { forkJoin, map, tap } from 'rxjs';
+import { ProductService } from '../../core/services/product/product.service';
 
 @Component({
   selector: 'app-home',
