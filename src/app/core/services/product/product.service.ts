@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product';
 import { environment } from '../../../../environments/environment';
+import { SecurityService } from '../security/security.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ import { environment } from '../../../../environments/environment';
 export class ProductService {
   api_url: string = environment.apiUrl + '/products/'
   api_url_image: string = environment.apiUrl + '/products/product_image/'
-  admin_api_url: string = environment.apiUrl + '/admin/'
+  admin_api_url: string = environment.apiUrl + '/products/admin/'
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private securityService: SecurityService) {
   }
 
   getProducts(): Observable<Product[]> {
@@ -29,7 +30,7 @@ export class ProductService {
     formData.append('productImage', image)
     let header = new HttpHeaders({
       'Content-Type': 'multipart/form-data',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.securityService.getToken()
     })
 
     return this.httpClient.post(this.admin_api_url, formData, { headers: header })
@@ -37,14 +38,14 @@ export class ProductService {
 
   removeProduct(id: number) {
     let header = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.securityService.getToken()
     })
     return this.httpClient.delete(this.admin_api_url + id, { headers: header })
   }
 
   updateProduct(id: number, product: Product) {
     let header = new HttpHeaders({
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
+      'Authorization': 'Bearer ' + this.securityService.getToken()
     })
     return this.httpClient.put(this.admin_api_url + id, product, { headers: header })
   }

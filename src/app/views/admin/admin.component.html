@@ -2,7 +2,7 @@
 <div class="container position-absolute top-50 start-50 translate-middle shadow-lg h-75 p-4">
     <div class="border-bottom pb-3">
         <h3 class="d-inline pe-2 ">Products</h3>
-        <button type="button" class="btn btn-success float-end">Add</button>
+        <button type="button" class="btn btn-success float-end" (click)="addProductModal()">Add</button>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -17,16 +17,22 @@
                 </tr>
             </thead>
             <tbody>
+                @for (item of products; track item){
                 <tr>
-                    <th scope="row">3</th>
-                    <td>Sla</td>
-                    <td>Sla</td>
-                    <td>Sla</td>
-                    <td>Sla</td>
-                    <td><button type="button" class="btn btn-danger me-2 btn-sm">Remove</button>
-                        <button type="button" class="btn btn-info btn-sm">Edit</button>
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.product_name}}</td>
+                    <td>{{item.product_description}}</td>
+                    <td>{{item.product_quantity}}</td>
+                    <td>{{item.product_price}}</td>
+                    <td><button type="button" class="btn btn-danger me-2 btn-sm"
+                            (click)="deleteProduct(item.id)">Remove</button>
+                        <button type="button" class="btn btn-info btn-sm"
+                            (click)="editProductModal(item.id)">Edit</button>
                     </td>
                 </tr>
+                }@empty {
+                <h2>Don't Have Products!</h2>
+                }
             </tbody>
         </table>
     </div>

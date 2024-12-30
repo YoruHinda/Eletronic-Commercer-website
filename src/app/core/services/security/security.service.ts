@@ -43,4 +43,8 @@ export class SecurityService {
   getUserRole(): string {
     return localStorage.getItem(USER_ROLE) ? JSON.parse(atob(localStorage.getItem(USER_ROLE) as string)) : null;
   }
+
+  getToken(): string {
+    return localStorage.getItem(TOKEN) ? JSON.parse(atob(localStorage.getItem(TOKEN) as string)) : null;
+  }
 }
