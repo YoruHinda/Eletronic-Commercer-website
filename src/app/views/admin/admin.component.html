@@ -2,7 +2,7 @@
 <div class="container position-absolute top-50 start-50 translate-middle shadow-lg h-75 p-4">
     <div class="border-bottom pb-3">
         <h3 class="d-inline pe-2 ">Products</h3>
-        <button type="button" class="btn btn-success float-end" (click)="addProductModal()">Add</button>
+        <button type="button" class="btn btn-success float-end" (click)="openAddProductModal()">Add</button>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -27,7 +27,7 @@
                     <td><button type="button" class="btn btn-danger me-2 btn-sm"
                             (click)="deleteProduct(item.id)">Remove</button>
                         <button type="button" class="btn btn-info btn-sm"
-                            (click)="editProductModal(item.id)">Edit</button>
+                            (click)="openProductEditorModal(item)">Edit</button>
                     </td>
                 </tr>
                 }@empty {
@@ -36,4 +36,85 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<div #addProductModal class="modal fade" tabindex="-1">
+    <form #addProductForm="ngForm" (ngSubmit)="''" ngNativeValidate>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Product!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="ProductNameInput" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" aria-describedby="productName" required ngModel
+                            name="productName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ProductDescriptionInput" class="form-label">Product Description</label>
+                        <textarea class="form-control" rows="3" name="productDescription"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ProductQuantityInput" class="form-label">Product Quantity</label>
+                        <input type="number" class="form-control" aria-describedby="productQuantity" required ngModel
+                            name="productQuantity">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ProductPriceInput" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" aria-describedby="productPrice" required ngModel
+                            name="productPrice">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileSm" class="form-label">Product Image</label>
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="productImage">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Create New Product</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div #editProductModal class="modal fade" tabindex="-1">
+    <form #editProductForm="ngForm" (ngSubmit)="''" ngNativeValidate>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Product!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" aria-describedby="productName" required ngModel
+                            name="productName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Product Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            name="productDescription" ngModel></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productQuantity" class="form-label">Product Quantity</label>
+                        <input type="number" class="form-control" aria-describedby="productQuantity" required ngModel
+                            name="productQuantity">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" aria-describedby="productPrice" required ngModel
+                            name="productPrice">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Edit Product</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
