@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { SecurityService } from '../core/services/security/security.service';
 
 @Injectable({
@@ -9,10 +9,10 @@ export class UserGuard implements CanActivate {
 
   constructor(private router: Router, private securityService: SecurityService) { }
   canActivate(): boolean {
-    if (this.securityService.isLogged() && this.securityService.getUserRole() === 'ADMIN') {
-      return true;
+    if (this.securityService.isLogged()) {
+      this.router.navigate([''])
+      return false;
     }
-    this.router.navigate(['']);
-    return false;
+    return true;
   }
 }
