@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../../models/product';
@@ -23,15 +23,29 @@ export class ProductService {
     return this.httpClient.get(this.api_url_image + imageName, { responseType: 'blob' });
   }
 
-  addNewProduct() {
+  addNewProduct(product: Product, image: any) {
+    const formData = new FormData();
+    formData.append('product', JSON.stringify(product));
+    formData.append('productImage', image)
+    let header = new HttpHeaders({
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
 
+    return this.httpClient.post(this.admin_api_url, formData, { headers: header })
   }
 
-  removeProduct() {
-
+  removeProduct(id: number) {
+    let header = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+    return this.httpClient.delete(this.admin_api_url + id, { headers: header })
   }
 
-  updateProduct() {
-
+  updateProduct(id: number, product: Product) {
+    let header = new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+    return this.httpClient.put(this.admin_api_url + id, product, { headers: header })
   }
 }
