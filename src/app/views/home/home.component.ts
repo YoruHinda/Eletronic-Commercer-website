@@ -43,4 +43,18 @@ export class HomeComponent implements OnInit {
     let objectURL = 'data:image/jpeg;base64,' + image?.image
     return image != null ? this.sanitizer.bypassSecurityTrustUrl(objectURL) : null
   }
+
+  addProductInCart(productToCart: Product) {
+    let productsCart = []
+    if (localStorage.getItem('ProductsCart')) {
+      productsCart = JSON.parse(localStorage.getItem('ProductsCart') as string)
+      productsCart.push(productToCart)
+      localStorage.setItem("ProductsCart", JSON.stringify(productsCart))
+      window.location.reload()
+      return
+    }
+    productsCart.push(productToCart);
+    localStorage.setItem("ProductsCart", JSON.stringify(productsCart))
+    window.location.reload()
+  }
 }

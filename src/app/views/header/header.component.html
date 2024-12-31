@@ -17,7 +17,7 @@
                     <a class="nav-link active text-light" aria-current="page" routerLink="/products">Products</a>
                 </li>
             </ul>
-            <a class="navbar-brand hoverclick">
+            <a class="navbar-brand hoverclick" (click)="openShopCart()">
                 <img [src]="'./assets/images/cart.png'" alt="carticon" width="32" height="32">
             </a>
             <a class="navbar-brand hoverclick" (click)="userLoginNavigator()">
@@ -31,3 +31,41 @@
         </div>
     </div>
 </nav>
+
+<div #shopCart class="modal modal-xl fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ShopCart!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    @for (item of productsCart; track item) {
+                    <div class="col">
+                        <div class="card border-light text-bg-dark mb-3">
+                            <img [src]="getImageByName(item.product_image_name)" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.product_name}}</h5>
+                                <p class="card-text">{{item.product_description}}</p>
+                                <p class="card-text">$ {{item.product_price}}</p>
+                                <p class="card-text">Quantity:</p>
+                                <button class="btn btn-info me-2">+</button>
+                                <button class="btn btn-info me-2">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    }@empty {
+                    <div>
+                        <h1>Cart Empty!</h1>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Checkout</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+            </div>
+        </div>
+    </div>
+</div>

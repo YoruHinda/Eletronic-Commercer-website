@@ -3,7 +3,6 @@
     <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">
         Products
     </div>
-    @if (products.length) {
     <div class="row row-cols-1 row-cols-md-3 g-4">
         @for (item of products; track item) {
         <div class="col">
@@ -12,19 +11,18 @@
                 <div class="card-body">
                     <h5 class="card-title">{{item.product_name}}</h5>
                     <p class="card-text">{{item.product_description}}</p>
-                    <p class="card-text">R$ {{item.product_price}}</p>
-                    <p class="card-text">quantitidade: {{item.product_quantity}}</p>
-                    <a href="#" class="btn btn-light">Comprar</a>
+                    <p class="card-text">$ {{item.product_price}}</p>
+                    <p class="card-text">Quantity: {{item.product_quantity}}</p>
+                    <button class="btn btn-light" (click)="addProductInCart(item)">Buy</button>
                 </div>
+            </div>
+        </div>
+        }@empty {
+        <div class="card">
+            <div class="card-body text-center">
+                OUT OF STOCK
             </div>
         </div>
         }
     </div>
-    }@else{
-    <div class="card">
-        <div class="card-body text-center">
-            OUT OF STOCK
-        </div>
-    </div>
-    }
 </div>
